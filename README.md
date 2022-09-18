@@ -251,5 +251,13 @@ Lets Check the ***http://127.0.0.1:1800/star-wars/species/*** URL Now, we should
 
 Using The API We are Going to create a Species ***Human*** into the Database , once it is Selected , Server will Respond with a HTTP Code along with Message 
 <img width="1391" alt="Screenshot 2022-09-18 at 9 32 10 PM" src="https://user-images.githubusercontent.com/77909856/190916540-7989fecd-0c5a-4588-86a1-de35a8d4b999.png">
+ Now Lets Add the Speciens into The DataBase using ***Raw Data*** Section 
  
+
+<img width="1380" alt="Screenshot 2022-09-18 at 9 40 02 PM" src="https://user-images.githubusercontent.com/77909856/190916969-ca40880d-c651-4e56-b65d-51178f36902e.png">
+
+When we hit the POST button we should now have one more species in our database.
+
+Similarly we can also access the People API via http://127.0.0.1:8000/star-wars/people/ and because the Person model has a foreign key to the Species model, the Browsable API will give a nice dropdown to select the relevant species.
+
 
