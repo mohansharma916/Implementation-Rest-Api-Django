@@ -246,3 +246,5 @@ urlpatterns = [
 # Start Using The API
 
 Lets Check the ***http://127.0.0.1:1800/star-wars/species/*** URL Now, we should be able to use the browsable api to post our species.
+
+<img width="1349" alt="Screenshot 2022-09-18 at 8 55 55 PM" src="https://user-images.githubusercontent.com/77909856/190914939-5cc4861f-6a82-4c92-a040-c5468ac0d815.png">
