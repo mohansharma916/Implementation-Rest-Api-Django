@@ -242,3 +242,7 @@ urlpatterns = [
 
 
 ```
+
+# Start Using The API
+
+Lets Check the ***http://127.0.0.1:1800/star-wars/species/*** URL Now, we should be able to use the browsable api to post our species.
