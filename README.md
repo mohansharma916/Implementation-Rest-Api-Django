@@ -141,3 +141,104 @@ class Person(models.Model):
 
 
 ```
+
+once We added all the details in models, Lets Run the migrations to let Django know that we want to create add 2 new tables to the database.
+
+The first step is to create a new igration by running the ***makemigrations*** command.
+
+```
+(env) & python3 manage.py makemigrations
+
+Migrations for 'my_api':
+  my__api/migrations/0001_initial.py
+    - Create model Species
+    - Create model Person
+```
+After the Migrations files are created , we can run the ***migrate*** command
+
+```
+(env) $ python3 manage.py migrate
+
+Operations to perform:
+  Apply all migrations: my_api
+Running migrations:
+  Applying my_api.0001_initial... OK
+  
+```
+
+# Set Up Django Rest FrameWork Serializers
+
+Now We have created the Models and Created the Tables , Now lets call Django RestFrameWork Serializers .The serializers will convert the Person model and Species model into JSON that will be used by the API to return the data to the user. We will add the serializers by creating a new file my_api/serializers.py
+
+```
+from rest_framework import serializers
+from my_api.models import Person,Species
+
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Person
+        fields=('name','birth_year','eye_color','species')
+
+
+
+class SpeciesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Species
+        fields=('name','classification','language')
+        
+```
+
+# Set Up Routers and Create API Urls
+
+```
+from django.shortcuts import render
+from rest_framework import viewsets
+
+
+from my_api.serializers import PersonSerializer,SpeciesSerializer
+from my_api.models import Person,Species
+
+
+
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset=Person.objects.all()
+    serializer_class=PersonSerializer
+
+class SpeciesViewSet(viewsets.ModelViewSet):
+    queryset=Species.objects.all()
+    serializer_class=SpeciesSerializer
+    
+```
+
+After the viewsets are defined we can now use the router functionality provided by DRF to route a desired API endpoint to the given viewset. Let’s create a new file ***my_api/urls.py*** and add the router configuration as shown below
+
+```
+from django.urls import include,path
+
+from rest_framework import routers
+
+from my_api.views import PersonViewSet,SpeciesViewSet
+
+router=routers.DefaultRouter()
+router.register(r'people',PersonViewSet)
+router.register(r'species',SpeciesViewSet)
+
+
+urlpatterns=[
+    path('',include(router.urls)),
+]
+```
+
+Finally let’s connect the main Django URL at restfull_api_project/urls.py to point to the app’s URL file.
+
+```
+
+from django.urls import path, include
+
+urlpatterns = [
+   path('star-wars/', include('my_awesome_api.urls')),
+]
+
+
+```
